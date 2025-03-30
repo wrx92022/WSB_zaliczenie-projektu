@@ -17,7 +17,7 @@
             type="Emphasized"
             class="sapUiSmallMarginTop" />
         
-        <Panel headerText="{i18n>employeeDetails}" class="sapUiSmallMarginTop" expandable="false">
+        <Panel headerText="{i18n>carDetails}" class="sapUiSmallMarginTop" expandable="false">
             <HBox>
                 <Avatar class="sapUiSmallMarginEnd" initials="IS" />
                 

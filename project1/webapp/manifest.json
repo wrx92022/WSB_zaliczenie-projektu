@@ -85,7 +85,7 @@
                     ]
                 },
                 {
-                    "pattern": "detail/{employeeID}",
+                    "pattern": "detail/{carID}",
                     "name": "Detail",
                     "target": "Detail"
                 }

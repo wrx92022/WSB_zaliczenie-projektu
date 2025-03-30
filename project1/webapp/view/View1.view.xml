@@ -5,50 +5,50 @@
     xmlns:fb="sap.ui.comp.filterbar">
     <Page id="page" title="{i18n>title}">
         <VBox>
-            <fb:FilterBar id="filterbar" persistencyKey="employeeFilterKey" useToolbar="false" filterChange="onFilterChange">
+            <fb:FilterBar id="filterbar" persistencyKey="carFilterKey" useToolbar="false" filterChange="onFilterChange">
                 <fb:filterGroupItems>
-                    <fb:FilterGroupItem name="Name" label="Name" groupName="Group1" visibleInFilterBar="true">
+                    <fb:FilterGroupItem name="Marka" label="Marka" groupName="Group1" visibleInFilterBar="true">
                         <fb:control>
-                            <Input id="idNameInput" liveChange="onFilterChange" />
+                            <Input id="idMarkaInput" liveChange="onFilterChange" />
                         </fb:control>
                     </fb:FilterGroupItem>
-                    <fb:FilterGroupItem name="LastName" label="Last Name" groupName="Group1" visibleInFilterBar="true">
+                    <fb:FilterGroupItem name="Model" label="Model" groupName="Group1" visibleInFilterBar="true">
                         <fb:control>
-                            <Input id="idLastNameInput" liveChange="onFilterChange" />
+                            <Input id="idModelInput" liveChange="onFilterChange" />
                         </fb:control>
                     </fb:FilterGroupItem>
-                    <fb:FilterGroupItem name="Position" label="Position" groupName="Group1" visibleInFilterBar="true">
+                    <fb:FilterGroupItem name="Rok" label="Rok produkcji" groupName="Group1" visibleInFilterBar="true">
                         <fb:control>
-                            <Input id="idPositionInput" liveChange="onFilterChange" />
+                            <Input id="idRokInput" liveChange="onFilterChange" />
                         </fb:control>
                     </fb:FilterGroupItem>
                 </fb:filterGroupItems>
             </fb:FilterBar>
-            <Table id="table" items="{path:'Employees>/Employees', sorter: {path: 'FirstName'}}" mode="SingleSelectLeft"  itemPress="onEmployeePress" selectionChange="onItemSelected">
+            <Table id="table" items="{path:'Cars>/Cars', sorter: {path: 'FirstName'}}" mode="SingleSelectLeft"  itemPress="oncarPress" selectionChange="onItemSelected">
                 <headerToolbar>
                     <OverflowToolbar id="otbSubheader">
                         <ToolbarSpacer/>
-                        <Button icon="sap-icon://add" text="Add Employee" tooltip="Add Employee" press="onAddEmployee" />
-                        <Button id="removeEmployeeBtn" icon="sap-icon://delete" text="Remove Employee" tooltip="Remove Employee" press="onDeleteEmployee" enabled="false" />
+                        <Button icon="sap-icon://add" text="Add Car" tooltip="Add Car" press="onAddCar" />
+                        <Button id="removeCarBtn" icon="sap-icon://delete" text="Remove Car" tooltip="Remove Car" press="onDeleteCar" enabled="false" />
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
                     <Column>
-                        <Text text="{i18n>nameColumnTxt}" />
+                        <Text text="{i18n>markaColumnTxt}" />
                     </Column>
                     <Column>
-                        <Text text="{i18n>lastNameColumnTxt}" />
+                        <Text text="{i18n>modelColumnTxt}" />
                     </Column>
                     <Column>
-                        <Text text="{i18n>positionColumnTxt}" />
+                        <Text text="{i18n>rokColumnTxt}" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem type="Navigation">
                         <cells>
-                            <Text text="{Employees>FirstName}" />
-                            <Text text="{Employees>LastName}" />
-                            <Text text="{Employees>Position}" />
+                            <Text text="{Cars>Marka}" />
+                            <Text text="{Cars>Model}" />
+                            <Text text="{Cars>Rok}" />
                         </cells>
                     </ColumnListItem>
                 </items>
