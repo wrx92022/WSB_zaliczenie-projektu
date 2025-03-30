@@ -11,14 +11,14 @@ sap.ui.define([
         onInit() {
         },
 
-        onEmployeePress: function (oEvent) {
+        onCarPress: function (oEvent) {
             let oItem = oEvent.getParameter("listItem");
-            let oContext = oItem.getBindingContext("Employees");
+            let oContext = oItem.getBindingContext("Cars");
             let sPath = oContext.getPath();
-            let sEmployeeID = this.getView().getModel("Employees").getProperty(sPath).ID;
+            let sCarID = this.getView().getModel("Cars").getProperty(sPath).ID;
             let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 
-            oRouter.navTo("Detail", { employeeID: sEmployeeID });
+            oRouter.navTo("Detail", { carID: sCarID });
         },
 
         onInputLiveChange: function (oEvent) {
@@ -46,13 +46,13 @@ sap.ui.define([
             }
         },
 
-        onAddEmployee: function () {
+        onAddCar: function () {
             let oView = this.getView();
 
             if (!this.pDialog) {
                 this.pDialog = Fragment.load({
                     id: oView.getId(),
-                    name: "project1.view.fragment.AddEmployee",
+                    name: "project1.view.fragment.AddCar",
                     controller: this
                 }).then(function (oDialog) {
                     oView.addDependent(oDialog);
@@ -65,41 +65,47 @@ sap.ui.define([
             });
         },
 
-        onSaveEmployee: function () {
+        onSaveCar: function () {
             let oView = this.getView(),
-                oModel = oView.getModel('Employees'),
-                aEmployees = oModel.getData().Employees;
+                oModel = oView.getModel('Cars'),
+                aCars = oModel.getData().Cars;
 
-            let sFirstName = oView.byId("firstNameInput").getValue(),
-                sLastName = oView.byId("lastNameInput").getValue(),
-                sPosition = oView.byId("positionInput").getValue(),
-                sEmail = oView.byId("emailInput").getValue(),
-                sPhone = oView.byId("phoneInput").getValue();
+            let sMarka = oView.byId("MarkaInput").getValue(),
+                sModel = oView.byId("ModelInput").getValue(),
+                sRok = oView.byId("RokInput").getValue(),
+                sVIN = oView.byId("VINInput").getValue(),
+                sNumer = oView.byId("NumerInput").getValue(),
+                sPrzebieg = oView.byId("PrzebiegInput").getValue(),
+                sPaliwo = oView.byId("PaliwoInput").getValue(),
+                sOsoba = oView.byId("OsobaInput").getValue();
 
-            if (!sFirstName || !sLastName || !sPosition) {
+            if (!sMarka || !sModel || !sRok || !sVIN || !sNumer || !sPrzebieg || !sPaliwo || !sOsoba) {
                 MessageToast.show("Please fill in required fields.");
                 return;
             }
 
-            let newEmployee = {
-                "ID": (aEmployees.length + 1).toString(),
-                "FirstName": sFirstName,
-                "LastName": sLastName,
-                "Position": sPosition,
-                "Email": sEmail,
-                "Phone": sPhone,
-                "Description": "Newly added employee."
+            let newCar = {
+                "ID": (aCars.length + 1).toString(),
+                "Marka": sMarka,
+                "Model": sModel,
+                "Rok": sRok,
+                "RegistrationNumber": sNumer,
+                "VIN": sVIN,
+                "Mileage": sPrzebieg,
+                "FuelType": sPaliwo,
+                "AssignedTo": sOsoba,
+                "Description": "Świeżo dodany samochód."
             };
 
-            aEmployees.push(newEmployee);
-            oModel.setProperty("/Employees", aEmployees);
+            aCars.push(newCar);
+            oModel.setProperty("/Cars", aCars);
 
-            MessageToast.show("Employee added!");
+            MessageToast.show("Car added!");
             this._clearForm();
-            this.onCancelEmployee();
+            this.onCancelCar();
         },
 
-        onCancelEmployee: function () {
+        onCancelCar: function () {
             this.pDialog.then(function (oDialog) {
                 oDialog.close();
             });
@@ -109,11 +115,14 @@ sap.ui.define([
         _clearForm: function () {
             let oView = this.getView(),
                 aInputs = [
-                    "firstNameInput",
-                    "lastNameInput",
-                    "positionInput",
-                    "emailInput",
-                    "phoneInput"
+                    "MarkaInput",
+                    "ModelInput",
+                    "RokInput",
+                    "VINInput",
+                    "NumerInput",
+                    "PrzebiegInput",
+                    "PaliwoInput",
+                    "OsobaInput"
                 ];
 
             aInputs.forEach(function (sInputId) {
@@ -125,38 +134,38 @@ sap.ui.define([
             });
         },
 
-        onDeleteEmployee: function () {
+        onDeleteCar: function () {
             let oTable = this.getView().byId("table"),
                 aSelectedItems = oTable.getSelectedItems(); // Zwraca tablicę zaznaczonych elementów
 
             // Pobieramy model z listą użytkowników
-            let oModel = this.getView().getModel("Employees");
-            let aEmployees = oModel.getProperty("/Employees");
+            let oModel = this.getView().getModel("Cars");
+            let aCars = oModel.getProperty("/Cars");
 
             // Usuwamy użytkowników na podstawie zaznaczonego indeksu
             aSelectedItems.forEach(function (oItem) {
-                let oContext = oItem.getBindingContext("Employees");
-                let sEmployeeID = oContext.getProperty("ID"); // Pobieramy ID użytkownika
-                let iIndex = aEmployees.findIndex(emp => emp.ID === sEmployeeID);
+                let oContext = oItem.getBindingContext("Cars");
+                let sCarID = oContext.getProperty("ID"); // Pobieramy ID użytkownika
+                let iIndex = aCars.findIndex(car => car.ID === sCarID);
                 if (iIndex !== -1) {
-                    aEmployees.splice(iIndex, 1); // Usuwamy pracownika
+                    aCars.splice(iIndex, 1); // Usuwamy pracownika
                 }
             });
 
             // aktualizujemy model
-            oModel.setProperty("/Employees", aEmployees);
+            oModel.setProperty("/Cars", aCars);
 
             // Wyczyść wybór w tabeli
             oTable.removeSelections(true);
 
-            this.getView().byId("removeEmployeeBtn").setEnabled(false);
+            this.getView().byId("removeCarBtn").setEnabled(false);
 
-            MessageToast.show("Employee deleted successfully.");
+            MessageToast.show("Car deleted successfully.");
         },
 
         onItemSelected: function () {
             let oTable = this.getView().byId("table"),
-                oRemoveButton = this.getView().byId("removeEmployeeBtn"),
+                oRemoveButton = this.getView().byId("removeCarBtn"),
                 aSelectedItems = oTable.getSelectedItems();
 
             if (aSelectedItems.length > 0) {
@@ -169,22 +178,22 @@ sap.ui.define([
         onFilterChange: function () {
             let oView = this.getView(),
                 oTable = oView.byId("table"),
-                sName = oView.byId("idNameInput").getValue(),
-                sLastName = oView.byId("idLastNameInput").getValue(),
-                sPosition = oView.byId("idPositionInput").getValue(),
+                sName = oView.byId("idMarkaInput").getValue(),
+                sModel = oView.byId("idModelInput").getValue(),
+                sRok = oView.byId("idRokInput").getValue(),
                 aFilters = [];
 
             // Tworzenie filtrów na podstawie wartości wprowadzonych przez użytkownika
             if (sName) {
-                aFilters.push(new Filter("FirstName", FilterOperator.Contains, sName));
+                aFilters.push(new Filter("Marka", FilterOperator.Contains, sName));
             }
 
-            if (sLastName) {
-                aFilters.push(new Filter("LastName", FilterOperator.Contains, sLastName));
+            if (sModel) {
+                aFilters.push(new Filter("Model", FilterOperator.Contains, sModel));
             }
 
-            if (sPosition) {
-                aFilters.push(new Filter("Position", FilterOperator.Contains, sPosition));
+            if (sRok) {
+                aFilters.push(new Filter("Rok", FilterOperator.Contains, sRok));
             }
 
             let oBinding = oTable.getBinding("items");

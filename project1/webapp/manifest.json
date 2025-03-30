@@ -52,7 +52,7 @@
                     "bundleName": "project1.i18n.i18n"
                 }
             },
-            "Employees": {
+            "Cars": {
                 "type": "sap.ui.model.json.JSONModel",
                 "uri": "model/mockdata.json"
             }

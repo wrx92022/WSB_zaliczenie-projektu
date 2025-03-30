@@ -22,33 +22,61 @@
                 <Avatar class="sapUiSmallMarginEnd" initials="IS" />
                 
                 <VBox class="sapUiMediumMarginEnd">
-                    <!-- Imię -->
-                    <Text text="Imię: " />
-                    <Input value="{employeeModel>/FirstName}" editable="{=${editModel>/editMode} }"/>
+                    <!-- Marka samochodu -->
+                    <Text text="Marka: " />
+                    <Input value="{carModel>/Marka}" editable="{=${editModel>/editMode} }"/>
 
-                    <!-- Nazwisko -->
-                    <Text text="Nazwisko: " />
-                    <Input value="{employeeModel>/LastName}" editable="{=${editModel>/editMode} }"/>
+                    <!-- Model samochodu -->
+                    <Text text="Model: " />
+                    <Input value="{carModel>/Model}" editable="{=${editModel>/editMode} }"/>
 
-                    <!-- Stanowisko -->
-                    <Text text="Stanowisko: " />
-                    <Input value="{employeeModel>/Position}" editable="{=${editModel>/editMode} }"/>
+                    <!-- Rok produkcji samochodu -->
+                    <Text text="Rok produkcji: " />
+                    <Input value="{carModel>/Rok}" editable="{=${editModel>/editMode} }"/>
+
                 </VBox>
                 
-                <VBox>
-                    <!-- Email -->
-                    <Text text="Email: " />
-                    <Input value="{employeeModel>/Email}" type="Email" editable="{=${editModel>/editMode} }"/>
+                <VBox class="sapUiMediumMarginEnd">
+                    <!-- Numer VIN samochodu -->
+                    <Text text="Numer VIN: " />
+                    <Input value="{carModel>/VIN}" editable="{=${editModel>/editMode} }"/>
 
-                    <!-- Numer telefonu -->
-                    <Text text="Numer telefonu: " />
-                    <Input value="{employeeModel>/Phone}" type="Tel" editable="{=${editModel>/editMode} }"/>
+                    <!-- Rok produkcji samochodu -->
+                    <Text text="Numer rejestracyjny: " />
+                    <Input value="{carModel>/RegistrationNumber}" editable="{=${editModel>/editMode} }"/>
+
+                    <!-- Przebieg samochodu -->
+                    <Text text="Przebieg: " />
+                    <Input value="{carModel>/Mileage}" type="Tel" editable="{=${editModel>/editMode} }"/>
+
+                    <!-- Rodzaj paliwa -->
+                    <Text text="Rodzaj paliwa: " />
+                    <Input value="{carModel>/FuelType}" type="Email" editable="{=${editModel>/editMode} }"/>
+
+                    <!-- Przypisany właściciel -->
+                    <Text text="Przypisany do: " />
+                    <Input value="{carModel>/AssignedTo}" type="Tel" editable="{=${editModel>/editMode} }"/>
                 </VBox>
+
+                <VBox class="sapUiMediumMarginEnd">
+                    <!-- Numer VIN samochodu -->
+                    <Text text="Przegląd ważny od: " />
+                    <Input value="{carModel>/LastInspection}" editable="{=${editModel>/editMode} }"/>
+
+                    <!-- Rok produkcji samochodu -->
+                    <Text text="Następny przegląd: " />
+                    <Input value="{carModel>/NextInspection}" editable="{=${editModel>/editMode} }"/>
+
+                    <!-- Przebieg samochodu -->
+                    <Text text="Status samochodu: " />
+                    <Input value="{carModel>/Status}" type="Tel" editable="{=${editModel>/editMode} }"/>
+                </VBox>
+                
             </HBox>
         </Panel>
 
-        <Panel headerText="Opis stanowiska" class="sapUiSmallMarginTop" expandable="false">
-            <Input value="{employeeModel>/Description}" editable="{=${editModel>/editMode} }"/>
+        <Panel headerText="Opis samochodu" class="sapUiSmallMarginTop" expandable="false">
+            <Input value="{carModel>/Description}" editable="{=${editModel>/editMode} }"/>
         </Panel>
 
         <!-- Przycisk Save oraz Cancel w trybie edycji -->

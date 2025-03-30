@@ -2,20 +2,30 @@
     <Dialog title="Add Car" class="sapUiResponsivePadding" contentWidth="25rem">
         <content>
             <VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom">
-                <Label text="Imię" required="true" />
-                <Input id="MarkaInput" placeholder="Imię"  />
+                <Label text="Marka" required="true" />
+                <Input id="MarkaInput" />
 
-                <Label text="Nazwisko" required="true" />
+                <Label text="Model" required="true" />
                 <Input id="ModelInput"/>
 
-                <Label text="Position" required="true"/>
+                <Label text="Rok produkcji" required="true"/>
                 <Input id="RokInput"/>
 
-                <!-- <Label text="Email" type="Email" />
-                <Input id="emailInput" liveChange="onInputLiveChange"/>
+                <Label text="Numer VIN" required="true"/>
+                <Input id="VINInput"/>
 
-                <Label text="Phone" />
-                <Input id="phoneInput" placeholder="123-456-789" liveChange="onInputLiveChange" /> -->
+                <Label text="Numer rejestracyjny" required="true"/>
+                <Input id="NumerInput"/>
+
+                <Label text="Przebieg" required="true"/>
+                <Input id="PrzebiegInput"/>
+
+                <Label text="Rodzaj paliwa" required="true"/>
+                <Input id="PaliwoInput"/>
+
+                <Label text="Przypisany do" required="true"/>
+                <Input id="OsobaInput"/>
+
             </VBox>
         </content>
         <buttons>

@@ -18,13 +18,13 @@ sap.ui.define([
         },
 
         _onObjectMatched: function (oEvent) {
-            let sEmployeeID = oEvent.getParameter("arguments").employeeID,
-                oModel = this.getView().getModel("Employees"),
-                aEmployees = oModel.getProperty("/Employees"),
-                oEmployee = aEmployees.find(emp => emp.ID === sEmployeeID),
-                oEmployeeModel = new sap.ui.model.json.JSONModel(oEmployee);
+            let sCarID = oEvent.getParameter("arguments").carID,
+                oModel = this.getView().getModel("Cars"),
+                aCars = oModel.getProperty("/Cars"),
+                oCar = aCars.find(car => car.ID === sCarID),
+                oCarModel = new sap.ui.model.json.JSONModel(oCar);
 
-            this.getView().setModel(oEmployeeModel, "employeeModel");
+            this.getView().setModel(oCarModel, "carModel");
         },
 
         onBackPress: function () {
@@ -37,36 +37,36 @@ sap.ui.define([
         },
 
         onSavePress: function () {
-            let oEmployeeModel = this.getView().getModel("employeeModel"),
-                oEmployeeData = oEmployeeModel.getData();
+            let oCarModel = this.getView().getModel("carModel"),
+                oCarData = oCarModel.getData();
 
-            // Zaktualizowanie danych w modelu "Employees"
-            let oEmployeesModel = this.getView().getModel("Employees"),
-                aEmployees = oEmployeesModel.getProperty("/Employees");
+            // Zaktualizowanie danych w modelu "Cars"
+            let oCarsModel = this.getView().getModel("Cars"),
+                aCars = oCarsModel.getProperty("/Cars");
 
-            let iIndex = aEmployees.findIndex(emp => emp.ID === oEmployeeData.ID);
+            let iIndex = aCars.findIndex(car => car.ID === oCarData.ID);
             if (iIndex !== -1) {
-                aEmployees[iIndex] = oEmployeeData; // Aktualizacja danych
+                aCars[iIndex] = oCarData; // Aktualizacja danych
             }
 
-            oEmployeesModel.setProperty("/Employees", aEmployees);
+            oCarsModel.setProperty("/Cars", aCars);
 
             this.getView().getModel("editModel").setProperty("/editMode", false);
 
-            MessageToast.show("Employee details saved successfully.");
+            MessageToast.show("Car details saved successfully.");
         },
 
         // Funkcja anulująca edycję
         onCancelPress: function () {
             // Przywrócenie początkowych danych użytkownika
-            let oEmployeeModel = this.getView().getModel("employeeModel"),
-                oEmployeeData = oEmployeeModel.getData();
+            let oCarModel = this.getView().getModel("carModel"),
+                oCarData = oCarModel.getData();
 
             // Ponownie ustawiamy dane w modelu, aby anulować zmiany
-            let oModel = this.getView().getModel("Employees"),
-                aEmployees = oModel.getProperty("/Employees"),
-                oOriginalEmployee = aEmployees.find(emp => emp.ID === oEmployeeData.ID);
-            oEmployeeModel.setData(oOriginalEmployee);
+            let oModel = this.getView().getModel("Cars"),
+                aCars = oModel.getProperty("/Cars"),
+                oOriginalCar = aCars.find(car => car.ID === oCarData.ID);
+            oCarModel.setData(oOriginalCar);
 
             this.getView().getModel("editModel").setProperty("/editMode", false);
 
